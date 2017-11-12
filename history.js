@@ -14,8 +14,8 @@ var end = new Date();
 // Get data
 function get_data(i){
 	if(i < num_days){
-		start.setDate(today.getDate() - num_days+i-1);
-		end.setDate(today.getDate()-num_days+i);
+		start.setDate(today.getDate() - i-1);
+		end.setDate(today.getDate()-i);
 		publicClient.getProductHistoricRates({'start': start, 'end':end,'granularity': 600},(error, response, data)=>{
 			if (error){
 				console.log("there was an error");
@@ -26,8 +26,6 @@ function get_data(i){
 					.writeToString(data,function(err,data){
 						fs.appendFileSync('my.csv',data+'\n');
 					});
-					
-
 				i+=1;
 				get_data(i);
 			}
