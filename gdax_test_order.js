@@ -7,6 +7,19 @@ const sandbox = 'https://api-public.sandbox.gdax.com';
 
 const authedClient = new gdax.AuthenticatedClient(key,b64secret,passphrase,sandbox);
 
+
+const websocket = new gdax.WebsocketClient(['BTC-USD']);
+
+websocket.on('message', data => { 
+	console.log(data) >;
+ });
+websocket.on('error', err => { 
+	console.log("there was an error");
+});
+websocket.on('close', () => { 
+	console.log("close");
+});
+
 // authedClient.getAccounts((error, response, data)=>{
 // 	if(error){
 // 		console.log("there was an error");
@@ -29,6 +42,6 @@ const authedClient = new gdax.AuthenticatedClient(key,b64secret,passphrase,sandb
 // 	}
 // })
 
-authedClient.getOrders((error, response, data)=>{
-	console.log(data);
-});
+// authedClient.getOrders((error, response, data)=>{
+// 	console.log(data);
+// });
